@@ -1,0 +1,4 @@
+CREATE TABLE origins (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL
+)

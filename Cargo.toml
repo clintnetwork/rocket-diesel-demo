@@ -1,0 +1,17 @@
+[package]
+name = "mjolnir"
+version = "0.1.0"
+authors = ["Travis Elliott Davis <edavis@chef.io>"]
+
+[dependencies]
+rocket = "0.3.3"
+rocket_codegen = "0.3.3"
+rocket_contrib = "*"
+serde = "*"
+serde_json = "*"
+serde_derive = "*"
+diesel = { version = "0.99.0", features = ["postgres"] }
+diesel_infer_schema = { version = "0.99.0", features = ["postgres"] }
+r2d2 = "*"
+r2d2-diesel = "*"
+dotenv = "*"
