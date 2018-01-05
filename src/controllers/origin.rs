@@ -2,8 +2,12 @@ use diesel;
 use db;
 use models::origin::*;
 use diesel::prelude::*;
-use rocket::State;
+use rocket::Route;
 use rocket_contrib::Json;
+
+pub fn routes() -> Vec<Route> {
+    return routes![world, hello];
+}
 
 #[get("/world")]
 fn world(conn: db::DbConn) -> Json<Vec<Origin>> {
