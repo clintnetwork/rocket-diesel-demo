@@ -1,10 +1,7 @@
 use std::result;
-use failure;
+use std::error;
 
-pub type Result<T> = result::Result<T, failure::Error>;
+pub type Result<T> = result::Result<T, Box<error::Error>>;
 
-#[derive(Debug, Fail)]
-pub enum Error {
-    // #[fail(display = "{}", _0)]
-    // Base64DecodeError(DecodeError),
-}
+#[derive(Debug)]
+pub enum Error {}

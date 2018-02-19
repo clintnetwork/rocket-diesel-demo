@@ -3,19 +3,19 @@ use r2d2;
 use r2d2_diesel::ConnectionManager;
 use rocket::http::Status;
 use rocket::request::{self, FromRequest};
-use rocket::{Request, State, Outcome};
+use rocket::{Outcome, Request, State};
 use std::fmt;
-use std::net::{Ipv4Addr, IpAddr};
+use std::net::{IpAddr, Ipv4Addr};
 use std::ops::Deref;
 use url::percent_encoding::{utf8_percent_encode, PATH_SEGMENT_ENCODE_SET};
 
-#[derive(Debug, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct DbConfig {
-  pub host: IpAddr,
-  pub port: u16,
-  pub user: String,
-  pub password: Option<String>,
-  pub database: String,
+    pub host: IpAddr,
+    pub port: u16,
+    pub user: String,
+    pub password: Option<String>,
+    pub database: String,
 }
 
 impl Default for DbConfig {
@@ -25,7 +25,7 @@ impl Default for DbConfig {
             port: 5432,
             user: String::from("postgres"),
             password: None,
-            database: String::from(""),
+            database: String::from("rocket-diesel-demo"),
         }
     }
 }
@@ -81,4 +81,3 @@ impl Deref for DbConn {
         &self.0
     }
 }
-

@@ -1,1 +1,6 @@
-infer_schema!("postgres://localhost/mjolnir");
+table! {
+    origins (id) {
+        id -> Integer,
+        name -> Text,
+    }
+}

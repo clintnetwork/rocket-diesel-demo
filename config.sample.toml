@@ -1,0 +1,6 @@
+[db]
+host = "127.0.0.7"
+port = 5432
+user = "admin"
+password = "admin"
+database = "rocket-diesel-demo"
