@@ -22,6 +22,7 @@ impl Default for Config {
 
 impl Config {
     pub fn from_file(filepath: &str) -> Result<Self> {
+        println!("Config File Location: {:?}", filepath);
         let mut file = File::open(filepath)?;
         let mut raw = String::new();
         file.read_to_string(&mut raw)?;

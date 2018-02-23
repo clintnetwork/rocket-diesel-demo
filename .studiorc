@@ -1,0 +1,62 @@
+
+RED='\033[0;31m'
+NO_COLOR='\033[0m'
+
+install-packages() {
+  hab pkg install \
+  core/cacerts \
+  core/net-tools \
+  core/procps-ng \
+  core/curl \
+  -b -c stable
+}
+
+no_install_deps() {
+  local file="/src/cleanup"
+  if [ ! -f "$file" ]; then
+    touch "$file"
+  else
+    echo "1"
+  fi
+}
+
+# Cleanup any development touch files we laid down when checking to see if we could run NO_INSTALL_DEPS
+_cleanup() {
+  if [ -f "/src/cleanup" ]; then
+    rm "/src/cleanup"
+  fi
+}
+
+start-demo() {
+  start-cache
+  start-datastore
+  start-api
+}
+
+start-datastore() {
+  hab svc load core/postgresql
+}
+
+start-api() {
+  hab svc load edavis/rocket-diesel-demo --bind datastore:postgresql.default
+}
+
+stop-api() {
+  hab svc unload edavis/rocket-diesel-demo
+}
+
+build-api() {
+  stop-api
+  NO_INSTALL_DEPS=$(no_install_deps "builder-$component") \
+    build ./habitat-dev
+  start-api
+}
+
+start-cache() {
+  hab svc load core/sccache
+}
+
+trap _cleanup EXIT
+
+install-packages
+start-demo
