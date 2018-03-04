@@ -15,7 +15,8 @@ curl localhost:8000/world
 
 ## Development
 
-This project uses Habitat for development. 
+This project uses [Habitat](https://habitat.sh) for development.
+Follow the [instructions](https://www.habitat.sh/docs/install-habitat/) on setting up Habitat locally and come back.
 
 * Run `hab studio enter` to enter a development clean room.
 * `build-api` - Build a new version of the api
